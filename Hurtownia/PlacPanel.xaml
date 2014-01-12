@@ -1,0 +1,148 @@
+﻿<Window x:Class="Hurtownia.PlacPanel"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="PlacPanel" Height="500" Width="600">
+    <Grid>
+        <TabControl>
+            <TabItem Header="Składanie">
+                <Grid Margin="3">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Margin="1,3,44,3" >Produkty:</Label>
+                    <ListBox Margin="3" Name="ListaProdukty"  Grid.Row="1"  Height="auto" ItemsSource="{Binding ElementName=dane}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="4">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock  Margin="1" Text="{Binding Nazwa}"  />
+                                    <TextBlock  Grid.Column="1" Margin="1" Text="{Binding Opis}"  />
+                                    <TextBlock Grid.Column="2" Margin="1" Text="{Binding Cena}" />
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <Label Margin="9,2,0,4" Grid.Column="3" >Zamówienie:</Label>
+                    <Grid Margin="3" Grid.Row="1" Grid.Column="2" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        
+                    <ListBox Margin="3" Name="ListaZamowienie"  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Height="auto" ItemsSource="{Binding ElementName=dane2}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="4">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock  Margin="1" Text="{Binding Nazwa}"  />
+                                    <TextBlock  Grid.Column="1" Margin="1" Text="{Binding Opis}"  />
+                                    <TextBlock Grid.Column="2" Margin="1" Text="{Binding Sztuk}" />
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <Button Margin="3" Name="Zloz" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Click="Zloz_Click">Złóż zamówienie</Button>
+                    <Button Margin="3" Name="Anuluj" Grid.Row="3" Grid.Column="2" Click="Anuluj_Click">Anuluj</Button>
+                    <Button Margin="3" Name="Zapis" Grid.Row="4" Grid.Column="0" Click="Zapis_Click">Zapisz</Button>
+                        <Button Margin="3" Name="Odczyt" Grid.Row="4" Grid.Column="1" Click="Odczyt_Click">Odczytaj</Button>
+                    </Grid>
+                        <Grid Grid.Row="1" Grid.Column="1" DataContext="{Binding ElementName=dane, Path=SelectedItem}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Label Margin="3">Nazwa</Label>
+                            <Label Margin="3" Grid.Row="1">Opis</Label>
+                            <Label Margin="3" Grid.Row="2">Cena</Label>
+                            <Label Margin="3" Grid.Row="3">Sztuk</Label>
+                            <TextBox Margin="3" Name="BoxNazwa" Grid.Column="1" Text="{Binding Path=Nazwa}" />
+                        <TextBox Margin="3" Name="BoxOpis" Grid.Row="1" Grid.Column="1" IsEnabled="False" Text="{Binding Path=Opis}" />
+                        <TextBox Margin="3" Name="BoxCena" Grid.Row="2" Grid.Column="1" IsEnabled="False" Text="{Binding Path=Cena}" />
+                            <TextBox Margin="3" Name="BoxSztuk" Grid.Row="3" Grid.Column="1" Text="1"></TextBox>
+                            <Button Margin="3" Name="ButtonDodaj" Grid.Row="4" Grid.Column="1" Click="ButtonDodaj_Click">Dodaj</Button>
+                            <Button Margin="3" Name="ButtonUsun" Grid.Row="5" Grid.Column="1" Click="ButtonUsun_Click">Usuń</Button>
+                    </Grid>
+                        <Button Margin="3" Padding="3" Grid.Row="2" Grid.ColumnSpan="4"  >Zamknij</Button>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Zamówienia">
+                <Grid Margin="3">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Margin="9,2,0,4">Zamówienia</Label>
+                    <ListBox Margin="3" Name="zamowieniaLista2"  Grid.Row="1" Height="auto" ItemsSource="{Binding ElementName=daneZamowien}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="4">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock  Margin="1" Text="{Binding Nazwa}"  />
+                                    <TextBlock  Grid.Column="1" Margin="1" Text="{Binding Id_zamowienie}"  />
+                                    <TextBlock Grid.Column="2" Margin="1" Text="{Binding Data}" />
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+                    <Label Margin="1,3,44,3" Grid.Column="1">Do Wysłania</Label>
+                    <ListBox Margin="3" Name="dowyslaniaLista2"  Grid.Row="1" Grid.Column="1" Height="auto" />
+                    <StackPanel Margin="0,0,5,0" Grid.Column="3" Grid.Row="1" >
+                        <Button Margin="3" Padding="10,3" Click="ButtonPokazFakture_Click">Pokaż fakturę</Button>
+                        <Button Margin="3" Padding="10,3" Click="ButtonGeneruj_Click"  >Wygeneruj fakturę ADMIN!!!</Button>
+                        <Button Margin="3" Padding="10,3"  >...</Button>
+                        <Button Margin="3" Padding="10,3"  >...</Button>
+                        <Button Margin="3" Padding="10,3"  >...</Button>
+                    </StackPanel>
+                    <Button Margin="3" Padding="3" Grid.Row="2" Grid.ColumnSpan="4"  >Zamknij</Button>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Ustawienia">
+                
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
